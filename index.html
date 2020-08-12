@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/style.css">
+  <title>Meme generator</title>
+</head>
+
+<body onload="init()">
+
+  <input type="text" name="text" id="text" placeholder="Input text" onkeyup="drawMeme()">
+  <div class="canvas-container">
+    <canvas id="canvas" height="200" width="200"></canvas>
+  </div>
+
+  <div class="gallery"></div>
+
+  <button class="increase-btn" onclick="onIncrease(5)">Increase</button>
+  <button class="decrease-btn" onclick="onDecrease(-5)">Decrease</button>
+
+  <button class="up-btn" onclick="onUp(-5)">Up</button>
+  <button class="down-btn" onclick="onDown(5)">Down</button>
+
+  <button class="switch-btn" onclick="onSwitchLine()">Switch line</button>
+
+  <script src="js/memeService.js"></script>
+  <script src="js/memeController.js"></script>
+</body>
+
+</html>
