@@ -5,25 +5,100 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="css/style.css">
-  <title>Meme generator</title>
+  <link rel="stylesheet" href="//use.fontawesome.com/releases/v5.0.7/css/all.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Lemon&family=Pangolin&family=Russo+One&display=swap"
+    rel="stylesheet">
+  <title>MEMEGEN</title>
 </head>
 
 <body onload="init()">
 
-  <input type="text" name="text" id="text" placeholder="Input text" onkeyup="drawMeme()">
-  <div class="canvas-container">
-    <canvas id="canvas" height="200" width="200"></canvas>
+  <div class="screen" onclick="toggleMenu()"></div>
+
+  <header class="main-header">
+    <nav class="nav container flex space-between align-center">
+      <img class="header-logo" src="img/logo/LOGO.png">
+      <i class="hamburger fas fa-bars fa-2x" onclick="toggleMenu()"></i>
+      <i class="x fas fa-times fa-2x" onclick="toggleMenu()"></i>
+      <ul class="main-nav flex clean-list">
+        <li onclick="onGallery()"><a href="#" class="gal target">Gallery</a></li>
+        <li onclick="onMemes()"><a href="#" class="mem">Memes</a></li>
+        <span class="line">|</span>
+        <li onclick="openModal()"><a href="#">Info</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="canvas-container grid">
+    <div class="canvas grid">
+      <canvas id="canvas" height="500" width="500"></canvas>
+    </div>
+
+    <div class="editor grid">
+      <input type="text" name="text" id="text" placeholder="Input text" onkeyup="drawMeme()" onfocus="this.value=''">
+      <button class="add-btn" onclick="onAddLine()"><img src="/img/ICONS/add.png"></button>
+      <button class="switch-btn" onclick="onSwitchLine()"><img
+          src="/img/ICONS/up-and-down-opposite-double-arrows-side-by-side.png"></button>
+      <button class="delete-btn" onclick="onDelete()"><img src="/img/ICONS/trash.png"></button>
+      <a class="save-btn flex justify-center align-center" onclick="onSave()"><i class="far fa-save fa-3x"></i></a>
+      <a class="download-btn flex justify-center align-center" onclick="onDownload(this)"><i
+          class="fas fa-download fa-3x"></i></a>
+      <button class="share-btn" onclick="onShare()"><i class="fas fa-share fa-3x"></i></button>
+      <button class="increase-btn" onclick="onIncrease(5)"><img src="/img/ICONS/increase font - icon.png"></button>
+      <button class="decrease-btn" onclick="onDecrease(-5)"><img src="/img/ICONS/decrease font - icon.png"></button>
+      <button class="up-btn" onclick="onUp(-5)"><i class="fas fa-long-arrow-alt-up fa-3x"></i></button>
+      <button class="down-btn" onclick="onDown(5)"><i class="fas fa-long-arrow-alt-down fa-3x"></i></button>
+      <button class="align-left-btn" data-align="start" onclick="onAlignText(this)"><img
+          src="/img/ICONS/align-to-left.png"></button>
+      <button class="align-center-btn" data-align="center" onclick="onAlignText(this)"><img
+          src="/img/ICONS/center-text-alignment.png"></button>
+      <button class="align-right-btn" data-align="end" onclick="onAlignText(this)"><img
+          src="/img/ICONS/align-to-right.png"></button>
+      <button class="color-btn" onclick="onColorText()"><img src="/img/ICONS/paint-board-and-brush.png"></button>
+      <input type="color" id="color" name="color" value="#ffffff" onchange="onColorChange(this.value)">
+      <select name="fonts" id="fonts" onchange="onChangeFont()">
+        <option value="Impact">Impact</option>
+        <option value="Montserrat Alternates, sans-serif">Montserrat</option>
+        <option value="Pangolin, cursive">Pangolin</option>
+        <option value="Russo One, sans-serif">Russo</option>
+        <option value="Lemon, cursive">Lemon</option>
+      </select>
+    </div>
   </div>
 
-  <div class="gallery"></div>
+  <div class="images container">
+    <div class="gallery"></div>
+  </div>
 
-  <button class="increase-btn" onclick="onIncrease(5)">Increase</button>
-  <button class="decrease-btn" onclick="onDecrease(-5)">Decrease</button>
+  <div class="saved-memes">
+    <div class="saved-gallery container grid"></div>
+  </div>
 
-  <button class="up-btn" onclick="onUp(-5)">Up</button>
-  <button class="down-btn" onclick="onDown(5)">Down</button>
+  <footer class="main-footer flex">
+    <img class="footer-logo" src="img/logo/LOGO.png">
+    <small>© 2020 memegen - All Rights Reserved</small>
+  </footer>
 
-  <button class="switch-btn" onclick="onSwitchLine()">Switch line</button>
+  <div id="my-modal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <span class="close">&times;</span>
+        <h2>Memes, memes everywhere.</h2>
+      </div>
+      <div class="modal-body">
+        <p>
+          A meme is a virally transmitted image embellished with text, usually sharing pointed commentary on cultural
+          symbols, social ideas, or current events. A meme is typically a photo or video, although sometimes it can be a
+          block of text. When a meme resonates with many people, it's spread via social platforms like Twitter,
+          Facebook, Instagram, texting, and more. The more a meme is spread, the greater the cultural influence it has.
+        </p>
+      </div>
+      <div class="modal-footer">
+        <h3>Close</h3>
+      </div>
+    </div>
+  </div>
 
   <script src="js/memeService.js"></script>
   <script src="js/memeController.js"></script>
