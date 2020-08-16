@@ -2,7 +2,6 @@
 
 let gImgs = [];
 let gImgCount = 18;
-let gLineNum = 1;
 
 let gMeme = {
   selectedImgId: 1,
@@ -11,15 +10,15 @@ let gMeme = {
 }
 
 function reset() {
-  let lines = gMeme.lines;
-  lines.forEach(line => {
-    line.txt = '';
-    line.align = 'center';
-    line.color = '#ffffff';
-    line.size = 50;
-    line.font = 'Impact';
-  });
-  gLineNum = 1;
+  gMeme.lines = [];
+  // let lines = gMeme.lines;
+  // lines.forEach(line => {
+  //   line.txt = '';
+  //   line.align = 'center';
+  //   line.color = '#ffffff';
+  //   line.size = 50;
+  //   line.font = 'Impact';
+  // });
 }
 
 function createLine() {
@@ -32,28 +31,24 @@ function createLine() {
     positionX: gCanvas.width / 2,
     positionY: 100
   }
-  if (gLineNum === 2) {
+  if (gMeme.lines.length === 1) {
     line.positionY = 450;
-  } else if (gLineNum === 3) {
-    line.positionY = gCanvas.height / 2;
+  } else if (gMeme.lines.length === 2) {
+    line.positionY = 300;
   }
-  gLineNum++;
   return line;
 }
 
 function addLine() {
-  if (gLineNum > 3) return;
+  if (gMeme.lines.length === 3) return;
   gMeme.lines.push(createLine());
+  gMeme.selectedLineIdx = gMeme.lines.length - 1;
 }
 
 function deleteLine() {
-  gLineNum--;
-  if (gLineNum < 2) {
-    gLineNum = 1;
-    gMeme.selectedLineIdx = 0;
-    return;
-  }
-  gMeme.lines.pop();
+  if (gMeme.lines.length === 0) return;
+  gMeme.lines.splice(gMeme.selectedLineIdx, 1);
+  gMeme.selectedLineIdx = gMeme.lines.length - 1;
 }
 
 function createImages() {
@@ -72,6 +67,14 @@ function getImg() {
 
 function getLines() {
   return gMeme.lines;
+}
+
+function getCurrline() {
+  return gMeme.lines[gMeme.selectedLineIdx];
+}
+
+function setLineIdx() {
+  gMeme.selectedLineIdx = (gMeme.selectedLineIdx < gMeme.lines.length - 1) ? gMeme.selectedLineIdx + 1 : 0;
 }
 
 function setText(text) {
@@ -93,11 +96,6 @@ function setTextPositionX(val) {
 
 function setTextPositionY(val) {
   gMeme.lines[gMeme.selectedLineIdx].positionY += val;
-}
-
-function setLineIdx() {
-  gMeme.selectedLineIdx++;
-  if (gMeme.selectedLineIdx === 3) gMeme.selectedLineIdx = 0;
 }
 
 function setSelectedImgId(id) {

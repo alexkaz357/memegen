@@ -2,9 +2,30 @@
   box-sizing: border-box;
 }
 
+/* FONTS */
+@font-face {
+  font-family: Montserrat;
+  src: url(/fonts/MontserratAlternates-Regular.ttf);
+}
+
+@font-face {
+  font-family: Pangolin;
+  src: url(/fonts/Pangolin-Regular.ttf);
+}
+
+@font-face {
+  font-family: Russo;
+  src: url(/fonts/RussoOne-Regular.ttf);
+}
+
+@font-face {
+  font-family: Lemon;
+  src: url(/fonts/Lemon-Regular.ttf);
+}
+
 /* BASE */
 html {
-  font-family: 'Montserrat Alternates', sans-serif;
+  font-family: Montserrat, sans-serif;
   line-height: 1.25;
   color: black;
 }
@@ -12,7 +33,7 @@ html {
 body {
   margin: 0;
   font-size: 1.25rem;
-  overflow-x: hidden;
+  /* overflow-x: hidden; */
 }
 
 button,
@@ -46,8 +67,8 @@ a {
 
 
 canvas {
-  display: block;
-  border: 1px solid black;
+  /* display: block; */
+  /* border: 1px solid black; */
 }
 
 /* LAYOUT */
@@ -60,9 +81,9 @@ canvas {
 .canvas-container {
   visibility: hidden;
   position: absolute;
-  width: 100vw;
+  width: 100%;
   height: 79vh;
-  border: 1px solid black;
+  /* border: 1px solid black; */
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr;
 }
@@ -135,7 +156,7 @@ canvas {
   grid-template-columns: repeat(8, minmax(50px, 75px));
   grid-template-rows: repeat(4, minmax(50px, 75px));
   gap: 0.625rem;
-  padding: 50px 20px 0 0;
+  padding: 100px 20px 0 0;
 }
 
 .canvas-container .editor input,
@@ -624,6 +645,14 @@ canvas {
     height: 35px;
   }
 
+  .gallery {
+    padding-bottom: 80px;
+  }
+
+  li:not(:last-child) {
+    margin-right: 0px;
+  }
+
   .main-header img {
     margin-top: 35px;
   }
@@ -639,7 +668,7 @@ canvas {
     max-height: 0;
     overflow: hidden;
     transition: max-height 1.2s;
-    width: 100%;
+    width: 450px;
     z-index: 1;
   }
 
@@ -681,18 +710,26 @@ canvas {
     transition: opacity .8s linear;
   }
 
+  body.menu-open .editor .color-btn {
+    z-index: 0;
+  }
+
+  body.menu-open .main-footer {
+    z-index: 0;
+  }
+
   .canvas-container {
-    height: 120vh;
-    border: 1px solid black;
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr 1fr;
+    height: 130vh;
+    /* border: 1px solid black; */
+    grid-template-columns: 100%;
+    grid-template-rows: 50% 50%;
     margin-bottom: 50px;
   }
 
   .canvas-container .editor {
-    grid-template-columns: repeat(8, minmax(50px, 75px));
+    grid-template-columns: repeat(8, minmax(45px, 75px));
     grid-template-rows: repeat(4, 50px);
-    gap: 0.625rem;
+    /* gap: 0.5rem; */
     padding: 50px 20px 0 0;
   }
 
